@@ -26,8 +26,9 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('administrador')
             ->login()
+            ->brandName('STI 2026')
             ->colors([
                 'primary' => Color::Amber,
             ])

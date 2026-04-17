@@ -28,7 +28,7 @@
             </div>
             <div class="p-8 bg-surface-container rounded-lg relative border border-outline-variant/50">
                 <span class="material-symbols-outlined text-accent-yellow/20 text-6xl absolute top-6 right-6">format_quote</span>
-                <p class="text-on-surface text-lg italic mb-6 leading-relaxed relative z-10">"Excelente organización. El STIPG es el puente perfecto entre la academia de Huila y la industria internacional."</p>
+                <p class="text-on-surface text-lg italic mb-6 leading-relaxed relative z-10">"Excelente organización. El STI es el puente perfecto entre la academia de Huila y la industria internacional."</p>
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-accent-yellow/20 flex items-center justify-center text-accent-yellow font-bold">JM</div>
                     <div>

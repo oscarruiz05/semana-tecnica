@@ -7,7 +7,7 @@
                 <span class="text-accent-yellow font-label text-sm font-bold uppercase tracking-widest">Liderazgo Académico</span>
                 <h2 class="font-headline text-5xl font-bold tracking-tight leading-tight">El evento líder en ingeniería de petróleos en Colombia.</h2>
                 <p class="text-on-surface-variant text-lg leading-relaxed">
-                    La Semana Técnica Internacional de Petróleo y Gas (STIPG) 2026 organizada por la Universidad Surcolombiana, se consolida como el epicentro del conocimiento técnico-científico del país. Reuniendo a los capítulos estudiantiles más destacados y a las corporaciones líderes del sector, buscamos trazar la hoja de ruta hacia una energía más limpia, eficiente y resiliente.
+                    La Semana Técnica Internacional de Petróleo y Gas (STI) 2026 organizada por la Universidad Surcolombiana, se consolida como el epicentro del conocimiento técnico-científico del país. Reuniendo a los capítulos estudiantiles más destacados y a las corporaciones líderes del sector, buscamos trazar la hoja de ruta hacia una energía más limpia, eficiente y resiliente.
                 </p>
                 <div class="grid grid-cols-2 gap-8 pt-6">
                     <div>

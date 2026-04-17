@@ -14,8 +14,15 @@
             <a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Contacto</a>
             <a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Patrocinios</a>
         </div>
-        <div class="font-body text-sm text-on-surface-variant/60 text-center md:text-right">
-            © <script>document.write(new Date().getFullYear())</script> Universidad Surcolombiana - STI. Todos los derechos reservados.
+        <div class="flex flex-col items-center md:items-end gap-3">
+            <a href="{{ url('/administrador') }}"
+               class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant/40 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-sm">admin_panel_settings</span>
+                Administrador
+            </a>
+            <div class="font-body text-sm text-on-surface-variant/60 text-center md:text-right">
+                © {{ date('Y') }} Universidad Surcolombiana - STI. Todos los derechos reservados.
+            </div>
         </div>
     </div>
 </footer>

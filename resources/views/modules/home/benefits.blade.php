@@ -2,7 +2,7 @@
     <div class="max-w-screen-2xl mx-auto">
         <div class="mb-16">
             <span class="text-accent-yellow font-label text-sm font-bold uppercase tracking-widest block mb-2">Beneficios del evento</span>
-            <h2 class="font-headline text-4xl font-bold tracking-tight">¿Por qué asistir al STIPG 2026?</h2>
+            <h2 class="font-headline text-4xl font-bold tracking-tight">¿Por qué asistir al STI 2026?</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="p-10 bg-surface-container-low rounded-xl border-t-4 border-primary group hover:bg-surface-container transition-all">
