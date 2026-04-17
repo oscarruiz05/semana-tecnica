@@ -9,6 +9,7 @@
         <div class="hidden md:flex items-center gap-10 font-headline tracking-tight text-sm uppercase font-bold">
             <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#agenda">Agenda</a>
             <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#speakers">Speakers</a>
+            <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#precios">Precios</a>
             <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#ubicacion">Ubicación</a>
             <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#nosotros">Nosotros</a>
         </div>

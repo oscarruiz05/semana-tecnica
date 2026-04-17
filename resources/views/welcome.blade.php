@@ -2,11 +2,13 @@
 
 @section('content')
     @include('modules.home.hero')
+    @include('modules.home.sponsors')
     @include('modules.home.benefits')
     @include('modules.home.agenda')
     @include('modules.home.speakers')
     @include('modules.home.about')
     @include('modules.home.location')
+    @include('modules.home.pricing')
     @include('modules.home.testimonials')
     @include('modules.home.registration')
     @include('modules.home.cta')

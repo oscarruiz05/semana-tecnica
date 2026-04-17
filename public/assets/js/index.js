@@ -31,7 +31,7 @@ document.querySelectorAll('a.nav-link').forEach(link => {
 });
 
 // Active nav highlight based on scroll position
-const sections = ['agenda', 'speakers', 'ubicacion', 'nosotros'];
+const sections = ['agenda', 'speakers', 'ubicacion', 'nosotros', 'precios'];
 function updateActiveNav() {
     const scrollY = window.scrollY + 120;
     let current = '';

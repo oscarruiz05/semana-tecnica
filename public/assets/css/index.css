@@ -1,3 +1,30 @@
+/* Sponsors slider */
+.sponsors-track-wrapper {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.sponsors-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: scroll-sponsors 30s linear infinite;
+}
+
+.sponsors-track:hover {
+    animation-play-state: paused;
+}
+
+.sponsor-item {
+    flex-shrink: 0;
+}
+
+@keyframes scroll-sponsors {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
 button {
     cursor: pointer;
 }
