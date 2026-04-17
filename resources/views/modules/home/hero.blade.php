@@ -13,17 +13,17 @@
                 Academia y Sector Energético
             </div>
             <h1 class="font-headline text-5xl md:text-8xl font-bold tracking-tighter leading-[0.95] text-on-surface">
-                Semana Técnica Internacional de <span class="text-primary">Petróleo y Gas</span> 2026
+                Xlll Semana Técnica Internacional de <span class="text-primary">Petróleo y Gas</span> 2026
             </h1>
             <p class="text-on-surface-variant text-xl md:text-2xl max-w-2xl leading-relaxed font-light">
                 Liderando la transición energética: <span class="text-accent-green font-medium">Innovación</span>, Networking y Futuro en el corazón energético de Colombia.
             </p>
             <div class="flex flex-col sm:flex-row gap-6 pt-6">
-                <button class="kinetic-gradient text-on-primary font-headline font-bold py-5 px-10 rounded-md text-lg hover:shadow-[0_0_30px_rgba(255,140,0,0.4)] transition-all flex items-center justify-center gap-3">
+                <button onclick="scrollToSection('registro')" class="kinetic-gradient text-on-primary font-headline font-bold py-5 px-10 rounded-md text-lg hover:shadow-[0_0_30px_rgba(255,140,0,0.4)] transition-all flex items-center justify-center gap-3">
                     Inscribirme ahora
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
-                <button class="bg-surface-container-highest border border-outline-variant text-on-surface font-headline font-bold py-5 px-10 rounded-md text-lg hover:bg-surface-bright transition-all flex items-center justify-center gap-3">
+                <button onclick="scrollToSection('agenda')" class="bg-surface-container-highest border border-outline-variant text-on-surface font-headline font-bold py-5 px-10 rounded-md text-lg hover:bg-surface-bright transition-all flex items-center justify-center gap-3">
                     Ver Cronograma
                 </button>
             </div>

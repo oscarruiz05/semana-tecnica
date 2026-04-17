@@ -1,4 +1,4 @@
-<section class="py-24 px-8 bg-surface">
+<section id="registro" class="py-24 px-8 bg-surface">
     <div class="max-w-4xl mx-auto">
         <div class="bg-surface-container-low p-12 rounded-2xl shadow-2xl border border-primary/20">
             <div class="text-center mb-10">

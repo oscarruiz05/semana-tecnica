@@ -1,4 +1,4 @@
-<section class="py-24 px-8 bg-surface-container-low overflow-hidden relative">
+<section id="nosotros" class="py-24 px-8 bg-surface-container-low overflow-hidden relative">
     <div class="absolute inset-0 bg-background/50"></div>
     <div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
         <div class="relative">

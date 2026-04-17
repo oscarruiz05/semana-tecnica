@@ -1,4 +1,4 @@
-<section class="py-24 px-8 bg-surface-container-lowest">
+<section id="agenda" class="py-24 px-8 bg-surface-container-lowest">
     <div class="max-w-screen-2xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <div>

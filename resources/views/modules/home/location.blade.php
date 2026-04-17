@@ -1,6 +1,6 @@
-<section class="py-24 px-8 bg-surface">
+<section id="ubicacion" class="py-24 px-8 bg-surface">
     <div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row gap-12">
-        <div class="flex-1 bg-surface-container-high rounded-2xl overflow-hidden relative min-h-[400px] border border-outline-variant">
+        <div class="flex-1 bg-surface-container-high rounded-2xl overflow-hidden relative min-h-100 border border-outline-variant">
             <div class="absolute inset-0 opacity-20">
                 <div class="w-full h-full bg-[#0a192f] p-8 flex items-center justify-center">
                     <div class="text-primary/20 text-9xl font-bold uppercase select-none">Neiva</div>

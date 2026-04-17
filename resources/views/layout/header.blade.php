@@ -7,12 +7,12 @@
             </div>
         </div>
         <div class="hidden md:flex items-center gap-10 font-headline tracking-tight text-sm uppercase font-bold">
-            <a class="text-primary border-b-2 border-primary pb-1" href="#">Agenda</a>
-            <a class="text-on-surface hover:text-primary transition-colors" href="#">Speakers</a>
-            <a class="text-on-surface hover:text-primary transition-colors" href="#">Ubicación</a>
-            <a class="text-on-surface hover:text-primary transition-colors" href="#">Nosotros</a>
+            <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#agenda">Agenda</a>
+            <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#speakers">Speakers</a>
+            <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#ubicacion">Ubicación</a>
+            <a class="nav-link text-on-surface hover:text-primary transition-colors" href="#nosotros">Nosotros</a>
         </div>
-        <button class="kinetic-gradient text-on-primary font-label font-bold py-3 px-6 rounded-md hover:brightness-110 transition-all scale-95 active:scale-90 uppercase tracking-wider text-xs">
+        <button onclick="scrollToSection('registro')" class="kinetic-gradient text-on-primary font-label font-bold py-3 px-6 rounded-md hover:brightness-110 transition-all scale-95 active:scale-90 uppercase tracking-wider text-xs">
             Inscribirme ahora
         </button>
     </div>
