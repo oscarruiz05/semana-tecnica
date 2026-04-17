@@ -1,5 +1,13 @@
 @extends('layout.app')
 
 @section('content')
-    <h1>Hola</h1>
+    @include('modules.home.hero')
+    @include('modules.home.benefits')
+    @include('modules.home.agenda')
+    @include('modules.home.speakers')
+    @include('modules.home.about')
+    @include('modules.home.location')
+    @include('modules.home.testimonials')
+    @include('modules.home.registration')
+    @include('modules.home.cta')
 @endsection
