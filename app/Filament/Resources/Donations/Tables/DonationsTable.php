@@ -34,17 +34,11 @@ class DonationsTable
                     ->money('COP', locale: 'es_CO')
                     ->sortable(),
 
-                TextColumn::make('sponsor_package')
+                TextColumn::make('sponsorPackage.name')
                     ->label('Paquete')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'BASIC SPONSOR'    => 'gray',
-                        'SILVER SPONSOR'   => 'info',
-                        'GOLD SPONSOR'     => 'warning',
-                        'PLATINUM SPONSOR' => 'success',
-                        'DIAMOND SPONSOR'  => 'danger',
-                        default            => 'gray',
-                    }),
+                    ->color(fn ($record): string => $record->sponsorPackage?->color ?? 'gray')
+                    ->placeholder('Sin paquete'),
 
                 TextColumn::make('donation_date')
                     ->label('Fecha')

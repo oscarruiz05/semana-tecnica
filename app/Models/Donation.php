@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Donation extends Model
 {
@@ -17,16 +18,22 @@ class Donation extends Model
         'company_city',
         'company_economic_activity',
         'amount',
-        'sponsor_package',
+        'sponsor_package_id',
         'signer_name',
         'signer_role',
         'signer_cc',
     ];
 
     protected $casts = [
-        'donation_date' => 'date',
-        'amount'        => 'integer',
+        'donation_date'      => 'date',
+        'amount'             => 'integer',
+        'sponsor_package_id' => 'integer',
     ];
+
+    public function sponsorPackage(): BelongsTo
+    {
+        return $this->belongsTo(SponsorPackage::class);
+    }
 
     public function getAmountInWordsAttribute(): string
     {

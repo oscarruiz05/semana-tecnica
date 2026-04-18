@@ -399,7 +399,7 @@
         <tr>
             <td class="desc-cell">
                 Aporte extraordinario a la {{ $config->org_name }} ({{ strtoupper($config->org_short_name) }}),
-                como donacion que da derecho al paquete <strong>{{ strtoupper($donation->sponsor_package) }}</strong>
+                como donacion que da derecho al paquete <strong>{{ strtoupper($donation->sponsorPackage?->name ?? '') }}</strong>
                 de la {{ $config->event_edition_roman }} semana Tecnica internacional a realizarce del
                 {{ \Carbon\Carbon::parse($config->event_dates_from)->locale('es')->isoFormat('D') }}
                 al

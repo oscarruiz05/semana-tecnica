@@ -100,7 +100,7 @@
         <div class="toolbar-left">
             <div>
                 <h1>{{ $donation->company_name }}</h1>
-                <p>NIT: {{ $donation->company_nit }} &nbsp;·&nbsp; {{ $donation->sponsor_package }} &nbsp;·&nbsp; {{ $donation->formatted_amount }}</p>
+                <p>NIT: {{ $donation->company_nit }} &nbsp;·&nbsp; {{ $donation->sponsorPackage?->name ?? '—' }} &nbsp;·&nbsp; {{ $donation->formatted_amount }}</p>
             </div>
         </div>
         <div class="toolbar-right">
