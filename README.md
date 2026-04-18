@@ -1,58 +1,307 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# STI 2026 — Sistema de Gestión Semana Técnica Internacional
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema web para la gestión y difusión de la **Semana Técnica Internacional de Ingeniería de Petróleos (STI)**. Incluye un sitio público para los asistentes y un panel administrativo completo para el equipo organizador.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Stack tecnológico
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Capa | Tecnología |
+|------|-----------|
+| Backend | Laravel 13 (PHP 8.3+) |
+| Panel admin | Filament 5 |
+| Frontend | Blade + TailwindCSS 4 + Vite 8 |
+| Base de datos | PostgreSQL (configurable a SQLite) |
+| PDFs | DomPDF (`barryvdh/laravel-dompdf`) |
+| Calendario | Guava Calendar 3 (`guava/calendar`) |
+| Testing | Pest 4 |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Requisitos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.3+
+- Composer
+- Node.js 18+ y npm
+- PostgreSQL (o SQLite para desarrollo rápido)
+- Extensión PHP `intl` (para conversión de números a palabras en PDFs)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Instalación
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Clonar el repositorio
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <url-del-repositorio>
+cd semana-tecnica
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Instalación automática
 
-## Contributing
+```bash
+composer setup
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Este comando ejecuta en orden:
+1. `composer install`
+2. Copia `.env.example` → `.env`
+3. `php artisan key:generate`
+4. `php artisan migrate`
+5. `npm install`
+6. `npm run build`
 
-## Code of Conduct
+### 3. Configurar el entorno
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Editar `.env` con los datos de la base de datos:
 
-## Security Vulnerabilities
+```env
+APP_NAME="STI 2026"
+APP_URL=http://localhost:8000
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=semana_tecnica
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_password
+```
 
-## License
+> Para desarrollo con SQLite cambiar `DB_CONNECTION=sqlite` y crear el archivo:
+> ```bash
+> touch database/database.sqlite
+> ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 4. Crear enlace de almacenamiento
+
+```bash
+php artisan storage:link
+```
+
+### 5. Crear el usuario administrador
+
+```bash
+php artisan make:filament-user
+```
+
+---
+
+## Desarrollo
+
+Levantar todos los servicios en paralelo (servidor, queue y Vite):
+
+```bash
+composer dev
+```
+
+O por separado:
+
+```bash
+php artisan serve                    # Servidor en http://localhost:8000
+npm run dev                          # Vite en modo watch
+php artisan queue:listen --tries=1   # Procesador de colas
+```
+
+---
+
+## Comandos útiles
+
+```bash
+# Migraciones
+php artisan migrate                  # Ejecutar migraciones pendientes
+php artisan migrate:fresh --seed     # Reiniciar base de datos con seeders
+php artisan migrate:status           # Ver estado de migraciones
+
+# Caché
+php artisan optimize:clear           # Limpiar toda la caché
+php artisan config:clear
+php artisan view:clear
+php artisan cache:clear
+
+# Assets
+npm run build                        # Compilar para producción
+npm run dev                          # Modo desarrollo con HMR
+php artisan filament:assets          # Publicar assets de Filament y plugins
+
+# Filament
+php artisan make:filament-user       # Crear usuario administrador
+php artisan filament:upgrade         # Actualizar Filament
+
+# Testing
+composer test
+```
+
+---
+
+## Estructura del proyecto
+
+```
+app/
+├── Filament/
+│   ├── Pages/
+│   │   ├── Settings.php             # Ajustes globales del evento
+│   │   └── CalendarSchedule.php     # Página del calendario (embebida en Cronograma)
+│   ├── Resources/
+│   │   ├── Donations/               # Grupo: Donaciones
+│   │   │   ├── DonationResource.php
+│   │   │   └── SponsorPackageResource.php
+│   │   ├── Plans/                   # Grupo: Inscripciones
+│   │   │   └── PlanResource.php
+│   │   ├── Program/                 # Grupo: Programa
+│   │   │   └── ScheduleItemResource.php
+│   │   └── Speakers/                # Grupo: Programa
+│   │       └── SpeakerResource.php
+│   └── Widgets/
+│       └── ScheduleCalendarWidget.php
+├── Http/Controllers/
+│   ├── DonationPdfController.php    # Generación de PDFs de donaciones
+│   └── WelcomeController.php        # Sitio público
+└── Models/
+    ├── Donation.php
+    ├── Plan.php
+    ├── ScheduleItem.php
+    ├── Setting.php
+    ├── Speaker.php
+    ├── SponsorPackage.php
+    └── User.php
+
+resources/views/
+├── modules/home/                    # Secciones del sitio público
+│   ├── hero.blade.php
+│   ├── about.blade.php
+│   ├── speakers.blade.php
+│   ├── agenda.blade.php
+│   ├── pricing.blade.php
+│   ├── registration.blade.php
+│   ├── sponsors.blade.php
+│   └── ...
+└── pdf/
+    ├── certificado-donacion.blade.php
+    ├── documento-soporte.blade.php
+    └── preview.blade.php
+```
+
+---
+
+## Módulos del panel administrativo
+
+El panel está disponible en `/administrador`.
+
+### Donaciones
+
+| Módulo | Ruta | Descripción |
+|--------|------|-------------|
+| Paquetes | `/administrador/donaciones/paquetes` | Paquetes sponsor con nombre, monto y color de badge |
+| Donaciones | `/administrador/donaciones/registro` | Registro de empresas donantes con generación de PDFs |
+
+**Flujo de donaciones:**
+1. Configurar paquetes en *Paquetes de Donación*
+2. Crear donación — el No. Documento se genera automáticamente y el valor se autocompleta al seleccionar el paquete
+3. Desde la tabla, botón **"Ver PDFs"** abre preview con:
+   - **Certificado de Donación** — documento formal para la empresa
+   - **Documento Soporte** — equivalente a factura con retención
+
+### Programa
+
+| Módulo | Ruta | Descripción |
+|--------|------|-------------|
+| Speakers | `/administrador/programa/speakers` | Ponentes con foto, profesión y datos de la charla |
+| Cronograma | `/administrador/programa/cronograma` | Agenda del evento con vista lista y calendario |
+
+El **Cronograma** tiene dos tabs:
+- **Lista** — tabla filtrable por día y tipo de evento
+- **Calendario** — vista interactiva FullCalendar (mes / semana / día / lista)
+
+Tipos de evento: `Apertura` · `Charla` · `Taller` · `Receso` · `Almuerzo` · `Clausura` · `Otro`
+
+### Inscripciones
+
+| Módulo | Ruta | Descripción |
+|--------|------|-------------|
+| Planes | `/administrador/planes` | Planes de acceso al evento con precio en COP |
+
+### Sistema
+
+| Módulo | Ruta | Descripción |
+|--------|------|-------------|
+| Ajustes | `/administrador/settings` | Configuración global del evento y la organización |
+
+Ajustes incluye cinco pestañas:
+- **Evento** — nombre, edición, fechas, ciudad
+- **Organización** — NIT, municipio, cámara de comercio
+- **Representante Legal** — nombre, cédula (para firmas en PDFs)
+- **Contador Público** — nombre, tarjeta profesional (para firmas en PDFs)
+- **Cuenta Bancaria** — banco, número, tipo de cuenta (para PDFs de donaciones)
+
+---
+
+## Sitio público
+
+Disponible en `/` — landing page con las secciones:
+
+| Sección | Descripción |
+|---------|-------------|
+| Hero | Presentación principal del evento |
+| About | Información sobre la STI |
+| Speakers | Ponentes confirmados |
+| Agenda | Cronograma del evento |
+| Pricing | Planes de inscripción (dinámico desde BD) |
+| Registration | Formulario de inscripción |
+| Sponsors | Empresas patrocinadoras |
+| Location | Lugar del evento |
+| Testimonials | Testimonios de ediciones anteriores |
+
+---
+
+## PDFs de donaciones
+
+Generados con DomPDF a partir de los datos de la donación y la configuración global.
+
+| Documento | Ruta | Notas |
+|-----------|------|-------|
+| Certificado de Donación | `/donaciones/{id}/pdf/certificado` | Lleva firmas del representante legal y contador |
+| Documento Soporte | `/donaciones/{id}/pdf/soporte` | Incluye retención y datos del agente retenedor |
+| Vista previa | `/donaciones/{id}/preview` | Ambos PDFs lado a lado con botones de descarga |
+
+> Estas rutas requieren autenticación.
+
+---
+
+## Base de datos
+
+| Tabla | Descripción |
+|-------|-------------|
+| `users` | Usuarios del panel administrativo |
+| `settings` | Configuración global del evento (registro único, ID=1) |
+| `plans` | Planes de inscripción al evento |
+| `sponsor_packages` | Paquetes de patrocinio con monto y color |
+| `donations` | Donaciones registradas con FK a `sponsor_packages` |
+| `speakers` | Ponentes con imagen, profesión y datos de charla |
+| `schedule_items` | Eventos del cronograma con FK opcional a `speakers` |
+
+---
+
+## Testing
+
+```bash
+composer test
+# o directamente:
+php artisan test
+php artisan test --filter NombreDelTest
+php artisan test --coverage
+```
+
+---
+
+## Despliegue en producción
+
+```bash
+composer install --no-dev --optimize-autoloader
+npm run build
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan migrate --force
+php artisan storage:link
+php artisan filament:assets
+```
