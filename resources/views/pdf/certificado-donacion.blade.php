@@ -2,132 +2,200 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificado de Donación</title>
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @page {
+            margin: 1cm 2.3cm;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.45;
             color: #000;
-            padding: 30px 40px;
-            line-height: 1.5;
+            margin: 0;
         }
-        .header {
+
+        .document {
+            width: 100%;
+        }
+
+        .logo {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 5px;
         }
-        .header h1 {
-            font-size: 13px;
+
+        .logo img {
+            width: 200px;
+            height: auto;
+        }
+
+        .title {
+            text-align: center;
             font-weight: bold;
             text-transform: uppercase;
-            line-height: 1.4;
+            font-size: 14px;
+            line-height: 1.35;
+            margin-bottom: 20px;
         }
-        .body-text {
+
+        p {
+            margin: 0 0 12px 0;
             text-align: justify;
-            margin-bottom: 12px;
         }
-        .body-text strong {
-            font-weight: bold;
-        }
+
         .list {
-            margin-left: 24px;
-            margin-bottom: 12px;
+            margin: 8px 0 14px 20px;
+            padding-left: 14px;
         }
+
         .list li {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             text-align: justify;
         }
+
         .city-date {
-            margin: 20px 0;
+            margin-top: 16px;
+            margin-bottom: 40px;
         }
+
         .signatures {
-            display: table;
             width: 100%;
-            margin-top: 60px;
         }
-        .sig-col {
-            display: table-cell;
+
+        table.signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            margin-top: 50px;
+        }
+
+        table.signature-table td {
             width: 50%;
-            text-align: center;
             vertical-align: top;
         }
-        .sig-line {
-            border-top: 1px solid #000;
-            width: 200px;
-            margin: 0 auto 6px auto;
-        }
-        .sig-name {
+
+        .signature-name {
             font-weight: bold;
-            font-size: 11px;
             text-transform: uppercase;
         }
-        .sig-role {
-            font-size: 11px;
+
+        .signature-role {
+            margin-top: 2px;
         }
-        .sig-detail {
-            font-size: 10px;
+
+        .signature-extra {
+            margin-top: 2px;
+        }
+
+        .left-signature {
+            padding-right: 30px;
+        }
+
+        .right-signature {
+            padding-left: 30px;
         }
     </style>
 </head>
+
 <body>
-    <div class="header">
-        <h1>
-            CERTIFICACION DE DONACION EXPEDIDO POR LA {{ strtoupper($config->org_name) }}<br>
-            CORRESPONDIENTE AL AÑO GRAVABLE DE {{ $config->event_year }}
-        </h1>
+@php
+    // 🔥 Recomendado: usar PNG en lugar de WEBP para PDFs
+    $logoPath = public_path('assets/images/logo.webp');
+    $logoBase64 = file_exists($logoPath) ? base64_encode(file_get_contents($logoPath)) : null;
+@endphp
+
+<div class="document">
+
+    {{-- LOGO --}}
+    @if($logoBase64)
+        <div class="logo">
+            <img src="data:image/png;base64,{{ $logoBase64 }}" alt="Logo">
+        </div>
+    @endif
+
+    {{-- TITULO --}}
+    <div class="title">
+        CERTIFICACION DE DONACION EXPEDIDO POR LA {{ strtoupper($config->org_name) }}<br>
+        CORRESPONDIENTE AL AÑO GRAVABLE DE {{ $config->event_year }}
     </div>
 
-    <p class="body-text">
+    {{-- INTRO --}}
+    <p>
         <strong>{{ strtoupper($config->org_rep_name) }}</strong>, identificado con la cédula de ciudadanía número
         {{ $config->org_rep_cc }} expedida en {{ $config->org_rep_cc_city }} en calidad de Representante Legal y
-        <strong>{{ strtoupper($config->org_accountant_name) }}</strong> En calidad de Contador Público de la {{ $config->org_name }}
-        "{{ $config->org_short_name }}" con Nit {{ $config->org_nit }} en adelante
-        "<strong>la asociación de ingenieros de petróleos egresados de la universidad Surcolombiana</strong>",
+        <strong>{{ strtoupper($config->org_accountant_name) }}</strong> en calidad de Contador Público de la
+        {{ strtoupper($config->org_name) }} “{{ strtoupper($config->org_short_name) }}”
+        con Nit {{ $config->org_nit }} en adelante
+        “la asociación de ingenieros de petróleos egresados de la universidad Surcolombiana”,
         entidad sin ánimo de lucro, certificamos:
     </p>
 
-    <p class="body-text">
-        Que durante el año {{ $config->event_year }} recibimos de <strong>{{ $donation->company_name }}</strong>,
+    {{-- CONTENIDO --}}
+    <p>
+        Que durante el año {{ $config->event_year }} recibimos de
+        <strong>{{ strtoupper($donation->company_name) }}</strong>,
         con Nit: {{ $donation->company_nit }} la suma de:
-        {{ $donation->amount_in_words }} ({{ $donation->formatted_amount }}) a título de donación,
-        mediante pago que se adjunta y hace parte integral de esta donación a la cuenta bancaria
-        de {{ $config->org_account_type }} No {{ $config->org_bank_account }} del {{ $config->org_bank_name }}.
+        {{ $donation->amount_in_words }} ({{ $donation->formatted_amount }})
+        a título de donación, mediante pago que se adjunta y hace parte integral de esta donación
+        a la cuenta bancaria de {{ $config->org_account_type }}
+        No {{ $config->org_bank_account }} del {{ $config->org_bank_name }}.
     </p>
 
+    {{-- LISTA --}}
     <ol class="list">
-        <li>Que esta entidad no tiene ánimo de lucro y ejerce sus actividades en el Municipio de {{ $config->org_municipality }}</li>
         <li>
-            Que su objeto social principal es el siguiente: "Asociar a los Profesionales con título de
-            Ingeniero de Petróleos egresados de la Universidad Sur colombiana, fomentar la
-            Ingeniería de Petróleos buscando el desarrollo de la profesión entre otros descritos en el objeto.
+            Que esta entidad no tiene ánimo de lucro y ejerce sus actividades en el Municipio de
+            {{ $config->org_municipality }}.
+        </li>
+        <li>
+            Que su objeto social principal es el siguiente: “Asociar a los Profesionales con título de
+            Ingeniero de Petróleos egresados de la Universidad Surcolombiana, fomentar la Ingeniería de Petróleos
+            buscando el desarrollo de la profesión entre otros descritos en el objeto.”
         </li>
         <li>
             Que la donación recibida se destinará a: la realización del evento denominado
-            "<strong>{{ $config->event_edition_number }} SEMANA TÉCNICA DE INGENIERÍA DE PETRÓLEOS</strong>"
+            “{{ $config->event_edition_number }} SEMANA TÉCNICA DE INGENIERÍA DE PETRÓLEOS”.
         </li>
         <li>
-            Que la entidad está inscrita en La Cámara de comercio de {{ $config->org_chamber_city }} quien certifica sobre
-            su existencia y representación legal. y se encuentra sometida en su funcionamiento al
-            control oficial de la {{ $config->org_control_body }}
+            Que la entidad está inscrita en la Cámara de comercio de {{ $config->org_chamber_city }},
+            quien certifica sobre su existencia y representación legal, y se encuentra sometida en su funcionamiento
+            al control oficial de la {{ $config->org_control_body }}.
         </li>
-        <li>Que esta entidad maneja los ingresos por donaciones en depósitos o inversiones en establecimientos financieros autorizados.</li>
+        <li>
+            Que esta entidad maneja los ingresos por donaciones en depósitos o inversiones en
+            establecimientos financieros autorizados.
+        </li>
     </ol>
 
-    <p class="city-date">{{ $config->event_city }}, {{ \Carbon\Carbon::parse($donation->donation_date)->locale('es')->isoFormat('D [de] MMMM [de] YYYY') }}</p>
+    {{-- FECHA --}}
+    <p class="city-date">
+        {{ $config->event_city }},
+        {{ \Carbon\Carbon::parse($donation->donation_date)->locale('es')->isoFormat('D [de] MMMM [de] YYYY') }}
+    </p>
 
+    {{-- FIRMAS --}}
     <div class="signatures">
-        <div class="sig-col">
-            <div class="sig-line"></div>
-            <div class="sig-name">{{ strtoupper($config->org_rep_name) }}</div>
-            <div class="sig-role">Representante Legal</div>
-        </div>
-        <div class="sig-col">
-            <div class="sig-line"></div>
-            <div class="sig-name">{{ strtoupper($config->org_accountant_name) }}</div>
-            <div class="sig-role">Contador Público</div>
-            <div class="sig-detail">T.p. {{ $config->org_accountant_tp }} &nbsp; C.c. {{ $config->org_accountant_cc }}</div>
-        </div>
+        <table class="signature-table">
+            <tr>
+                <td class="left-signature">
+                    <p class="signature-name">{{ strtoupper($config->org_rep_name) }}</p>
+                    <p class="signature-role">Representante Legal</p>
+                </td>
+                <td class="right-signature">
+                    <p class="signature-name">{{ strtoupper($config->org_accountant_name) }}</p>
+                    <p class="signature-role">Contador Público</p>
+                    <p class="signature-extra">
+                        T.p. {{ $config->org_accountant_tp }}
+                        C.c. {{ $config->org_accountant_cc }}
+                    </p>
+                </td>
+            </tr>
+        </table>
     </div>
+
+</div>
+
 </body>
 </html>
